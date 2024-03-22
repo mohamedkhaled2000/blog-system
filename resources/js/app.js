@@ -6,7 +6,14 @@ import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 import PrimeVue from 'primevue/config';
-import Dropdown from 'primevue/dropdown';
+import Editor from 'primevue/editor';
+import FileUpload from 'primevue/fileupload';
+import Timeline from 'primevue/timeline';
+import Card from 'primevue/card';
+import Avatar from 'primevue/avatar';
+import Button from 'primevue/button';
+import Textarea from 'primevue/textarea';
+
 import 'primevue/resources/themes/aura-light-green/theme.css'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -18,7 +25,12 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(PrimeVue, { ripple: true })
-            .component('Select', Dropdown)
+            .component('Editor', Editor)
+            .component('FileUpload', FileUpload)
+            .component('Timeline', Timeline)
+            .component('Card', Card)
+            .component('Avatar', Avatar)
+            .component('Button', Button)
             .use(ZiggyVue)
             .mount(el);
     },
