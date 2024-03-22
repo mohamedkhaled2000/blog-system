@@ -14,13 +14,17 @@ class CommentController extends Controller
     {}
 
     public function store(Request $request, Post $post) {
+
+        // dd($request->content);
         $validated = $request->validate([
-            'content.*' => 'required|string',
+            'content' => 'required|array',
+            'content.*' => 'required|string'
         ]);
 
-        $this->commentInterface->create([
+        $comment = $this->commentInterface->create([
             'content' => $validated['content'][$post->id],
         ], $post);
+
         return back();
     }
 }

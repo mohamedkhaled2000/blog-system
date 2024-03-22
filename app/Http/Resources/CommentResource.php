@@ -23,6 +23,7 @@ class CommentResource extends JsonResource
                 'email' => $this->user->email,
             ],
             'created_at' => $this->created_at->diffForHumans(),
+            'is_owner'  => $this->is_owner,
         ];
     }
 }

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostRequest;
+use App\Models\Post;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Interfaces\PostInterface;
-use Inertia\Inertia;
+use App\Http\Requests\PostRequest;
+use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
@@ -23,4 +25,31 @@ class PostController extends Controller
         return redirect()->route('dashboard');
     }
 
+    public function show(Post $post) {
+        $post = $this->postInterface->find($post->id);
+
+        if (request()->wantsJson()) {
+            return PostResource::make($post);
+        }
+
+        return Inertia::render('Post/Show', [
+            'post' => PostResource::make($post),
+        ]);
+    }
+
+    public function edit(Post $post) {
+        return Inertia::render('Post/Edit', [
+            'post' => PostResource::make($post),
+        ]);
+    }
+
+    public function update(PostRequest $postRequest, Post $post) {
+        $this->postInterface->update($postRequest->validated(), $post);
+        return redirect()->route('dashboard');
+    }
+
+    public function destroy(Post $post) {
+        $this->postInterface->delete($post);
+        return back();
+    }
 }

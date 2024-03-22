@@ -29,6 +29,13 @@ class PostRepository implements PostInterface {
     }
 
     public function update(array $data, Post $post) {
+        $image = Arr::pull($data, 'image');
+
+        if ($image) {
+            $post->clearMediaCollection('post_image');
+            $post->addMedia($image)->toMediaCollection('post_image');
+        }
+
         return $post->update($data);
     }
 

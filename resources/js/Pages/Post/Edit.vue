@@ -6,7 +6,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Radiobox from '@/Components/Radiobox.vue';
-import { onMounted } from 'vue';
+
 
 const props = defineProps({
     post: Object,
@@ -14,21 +14,19 @@ const props = defineProps({
 
 const form = useForm({
     title: {
-        ar: '',
-        en: '',
+        ar: props?.post?.data?.title_lang?.ar,
+        en: props?.post?.data?.title_lang?.en,
     },
     content: {
-        ar: '',
-        en: '',
+        ar: props?.post?.data?.content_lang?.ar,
+        en: props?.post?.data?.content_lang?.en,
     },
-    image: '',
+    image: props?.post?.data?.image,
     is_published: true,
 });
 
 const submit = () => {
-    form.post(route('posts.store'), {
-        onFinish: () => form.reset(),
-    });
+    form.put(route('posts.update', props.post.data.id));
 };
 
 const setSelectedImage = (event) => {
@@ -97,7 +95,7 @@ const setSelectedImage = (event) => {
                             </div>
 
                             <div class="mt-3">
-                                <primary-button>Create Post</primary-button>
+                                <primary-button>Update Post</primary-button>
                             </div>
                         </form>
                     </div>

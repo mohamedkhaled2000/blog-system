@@ -17,6 +17,7 @@ return new class extends Migration
             $table->json('content');
             $table->boolean('is_published')->default(true);
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -12,8 +12,8 @@ import Timeline from 'primevue/timeline';
 import Card from 'primevue/card';
 import Avatar from 'primevue/avatar';
 import Button from 'primevue/button';
-import Textarea from 'primevue/textarea';
-
+import SpeedDial from 'primevue/speeddial';
+import "primeicons/primeicons.css"
 import 'primevue/resources/themes/aura-light-green/theme.css'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
@@ -31,6 +31,7 @@ createInertiaApp({
             .component('Card', Card)
             .component('Avatar', Avatar)
             .component('Button', Button)
+            .component('SpeedDial', SpeedDial)
             .use(ZiggyVue)
             .mount(el);
     },
