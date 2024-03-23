@@ -13,6 +13,8 @@ import Card from 'primevue/card';
 import Avatar from 'primevue/avatar';
 import Button from 'primevue/button';
 import SpeedDial from 'primevue/speeddial';
+import Toast from 'primevue/toast';
+import ToastService from 'primevue/toastservice';
 import { createI18n  } from 'vue-i18n';
 import ar from './locales/ar.json';
 import en from './locales/en.json';
@@ -37,6 +39,7 @@ createInertiaApp({
             .use(plugin)
             .use(i18n)
             .use(PrimeVue, { ripple: true })
+            .use(ToastService)
             .component('Editor', Editor)
             .component('FileUpload', FileUpload)
             .component('Timeline', Timeline)
@@ -44,6 +47,7 @@ createInertiaApp({
             .component('Avatar', Avatar)
             .component('Button', Button)
             .component('SpeedDial', SpeedDial)
+            .component('Toast', Toast)
             .use(ZiggyVue)
             .mixin({
                 methods: {

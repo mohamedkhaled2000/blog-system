@@ -7,7 +7,9 @@ import { getCurrentInstance, ref } from 'vue';
 import axios from 'axios';
 import Dialog from 'primevue/dialog';
 import SplitButton from 'primevue/splitbutton';
+import { useToast } from 'primevue/usetoast';
 
+const toast = useToast();
 const { emit } = getCurrentInstance();
 
 const props = defineProps({
@@ -46,7 +48,8 @@ const deletePost = () => {
         preserveScroll: true,
         onSuccess: () => {
             visible.value = false;
-            emit('deletePost', props.post.id)
+            emit('deletePost', props.post.id);
+            toast.add({ severity: 'success', summary: 'Success', group: 'br', detail: 'Post deleted successfulty', life: 3000 });
         }
     });
 }
@@ -56,7 +59,8 @@ const deletePermanentlyPost = () => {
         preserveScroll: true,
         onSuccess: () => {
             visible.value = false;
-            emit('deletePost', props.post.id)
+            emit('deletePost', props.post.id);
+            toast.add({ severity: 'success', summary: 'Success', group: 'br', detail: 'Post deleted successfulty', life: 3000 });
         }
     });
 }
@@ -70,6 +74,7 @@ const deleteComments = () => {
         onSuccess: () => {
             visibleComment.value = false;
             comments.value = comments.value.filter(comment => !selectedCommentsId.value.includes(comment.id));
+            toast.add({ severity: 'success', summary: 'Success', group: 'br', detail: 'Comments deleted successfulty', life: 3000 });
         }
     });
 }

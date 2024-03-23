@@ -31,21 +31,19 @@ useIntersectionObserver(last, ([entry]) => {
 const deletePost = (postId) => {
     allPosts.value = allPosts.value.filter(post => post.id !== postId);
 }
-
 </script>
 
 <template>
-
     <Head title="Dashboard" />
 
     <AuthenticatedLayout>
+        <Toast position="bottom-right" group="br" />
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
                     <Link :href="route('posts.create')" class="primary-button">
                         {{ $t('Create Post') }}
                     </Link>
-
                     <div class="flex justify-center flex-col items-center">
                         <PostSection v-for="post in allPosts" :key="post.id" :post="post" @deletePost="deletePost" />
                         <div ref="last"></div>

@@ -7,7 +7,9 @@ import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Radiobox from '@/Components/Radiobox.vue';
 import { ref } from 'vue';
+import { useToast } from 'primevue/usetoast';
 
+const toast = useToast();
 let image = ref(null);
 
 const props = defineProps({
@@ -29,8 +31,12 @@ const form = useForm({
 });
 
 const submit = () => {
-    console.log("🚀 ~ submit ~ form:", form)
-    form.post(route('posts.update', props.post.data.id));
+    form.post(route('posts.update', props.post.data.id), {
+        onSuccess: (response) => {
+            console.log('asd');
+            toast.add({ severity: 'success', summary: 'Success', group: 'br', detail: 'Post updated successfulty', life: 3000 });
+        },
+    });
 };
 
 const setSelectedImage = (event) => {
@@ -43,6 +49,7 @@ const removeFile = () => {
     image.value.style = 'display: block';
     form.image = '';
 };
+
 
 </script>
 

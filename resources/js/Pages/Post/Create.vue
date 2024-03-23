@@ -6,8 +6,9 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import Radiobox from '@/Components/Radiobox.vue';
-import { onMounted } from 'vue';
+import { useToast } from 'primevue/usetoast';
 
+const toast = useToast();
 const props = defineProps({
     post: Object,
 });
@@ -28,6 +29,9 @@ const form = useForm({
 const submit = () => {
     form.post(route('posts.store'), {
         onFinish: () => form.reset(),
+        onSuccess: (response) => {
+            toast.add({ severity: 'success', summary: 'Success', group: 'br', detail: 'Post created successfulty', life: 3000 });
+        },
     });
 };
 
