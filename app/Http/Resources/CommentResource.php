@@ -24,6 +24,7 @@ class CommentResource extends JsonResource
             ],
             'created_at' => $this->created_at->diffForHumans(),
             'is_owner'  => $this->is_owner,
+            'post_id'   => $this->post_id,
         ];
     }
 }

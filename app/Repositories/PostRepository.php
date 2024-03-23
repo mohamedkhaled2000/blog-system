@@ -42,4 +42,8 @@ class PostRepository implements PostInterface {
     public function delete(Post $post) {
         return $post->delete();
     }
+
+    public function forceDelete(Post $post) {
+        return $post->forceDelete();
+    }
 }

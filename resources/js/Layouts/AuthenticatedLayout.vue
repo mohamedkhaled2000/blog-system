@@ -1,13 +1,26 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 import Dropdown from '@/Components/Dropdown.vue';
 import DropdownLink from '@/Components/DropdownLink.vue';
 import NavLink from '@/Components/NavLink.vue';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
 import { Link } from '@inertiajs/vue3';
+import axios from 'axios';
 
 const showingNavigationDropdown = ref(false);
+let lang = ref(null);
+
+const changeLang = async () => {
+    lang.value = lang.value === 'en' ? 'ar' : 'en';
+    localStorage.setItem('locale', lang.value);
+    await axios.post(route('change-lang', lang.value));
+    window.location.reload();
+}
+
+onMounted(() => {
+    lang.value = localStorage.getItem('locale') ?? 'en';
+})
 </script>
 
 <template>
@@ -30,12 +43,21 @@ const showingNavigationDropdown = ref(false);
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    {{ $t('Home') }}
                                 </NavLink>
                             </div>
                         </div>
 
                         <div class="hidden sm:flex sm:items-center sm:ms-6">
+                            <div>
+                                <a @click="changeLang" v-if="lang == 'ar'" class="primary-button" role="button">
+                                    EN
+                                </a>
+                                <a @click="changeLang" v-if="lang == 'en'" class="primary-button" role="button">
+                                    AR
+                                </a>
+                            </div>
+
                             <!-- Settings Dropdown -->
                             <div class="ms-3 relative">
                                 <Dropdown align="right" width="48">
@@ -64,13 +86,14 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                                        <DropdownLink :href="route('profile.edit')"> {{ $t('Profile') }} </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
+                                            {{ $t('Log Out') }}
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
                             </div>
+
                         </div>
 
                         <!-- Hamburger -->
@@ -113,7 +136,7 @@ const showingNavigationDropdown = ref(false);
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                            Dashboard
+                            {{ $t('Home') }}
                         </ResponsiveNavLink>
                     </div>
 
@@ -127,9 +150,9 @@ const showingNavigationDropdown = ref(false);
                         </div>
 
                         <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')"> Profile </ResponsiveNavLink>
+                            <ResponsiveNavLink :href="route('profile.edit')"> {{ $t('Profile') }} </ResponsiveNavLink>
                             <ResponsiveNavLink :href="route('logout')" method="post" as="button">
-                                Log Out
+                                {{ $t('Log Out') }}
                             </ResponsiveNavLink>
                         </div>
                     </div>

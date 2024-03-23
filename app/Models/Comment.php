@@ -24,6 +24,6 @@ class Comment extends Model
 
     public function getIsOwnerAttribute()
     {
-        return auth()->check() && auth()->id() == $this->user_id;
+        return auth()->id() == $this->user_id || auth()->id() == $this->post->user_id;
     }
 }

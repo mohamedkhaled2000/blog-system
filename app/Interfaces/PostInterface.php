@@ -15,4 +15,6 @@ interface PostInterface
     public function update(array $data, Post $post);
 
     public function delete(Post $post);
+
+    public function forceDelete(Post $post);
 }

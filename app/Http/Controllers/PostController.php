@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Interfaces\PostInterface;
 use App\Http\Requests\PostRequest;
 use App\Http\Resources\PostResource;
@@ -50,6 +49,11 @@ class PostController extends Controller
 
     public function destroy(Post $post) {
         $this->postInterface->delete($post);
+        return back();
+    }
+
+    public function forceDelete(Post $post) {
+        $this->postInterface->forceDelete($post);
         return back();
     }
 }

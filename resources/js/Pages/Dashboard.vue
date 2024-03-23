@@ -18,7 +18,7 @@ let nextLink = ref(props.posts.links.next);
 
 useIntersectionObserver(last, ([entry]) => {
     if (!entry.isIntersecting) {
-        return ;
+        return;
     }
 
     axios.get(nextLink.value)
@@ -43,7 +43,7 @@ const deletePost = (postId) => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
                     <Link :href="route('posts.create')" class="primary-button">
-                        Create post
+                        {{ $t('Create Post') }}
                     </Link>
 
                     <div class="flex justify-center flex-col items-center">

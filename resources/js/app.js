@@ -13,10 +13,21 @@ import Card from 'primevue/card';
 import Avatar from 'primevue/avatar';
 import Button from 'primevue/button';
 import SpeedDial from 'primevue/speeddial';
+import { createI18n  } from 'vue-i18n';
+import ar from './locales/ar.json';
+import en from './locales/en.json';
 import "primeicons/primeicons.css"
 import 'primevue/resources/themes/aura-light-green/theme.css'
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+
+const i18n = createI18n({
+    locale: localStorage.getItem('locale'),
+    messages: {
+        en: en,
+        ar: ar,
+    },
+});
 
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
@@ -24,6 +35,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(i18n)
             .use(PrimeVue, { ripple: true })
             .component('Editor', Editor)
             .component('FileUpload', FileUpload)
@@ -33,6 +45,11 @@ createInertiaApp({
             .component('Button', Button)
             .component('SpeedDial', SpeedDial)
             .use(ZiggyVue)
+            .mixin({
+                methods: {
+                    locale: () => localStorage.getItem('locale'),
+                },
+            })
             .mount(el);
     },
     progress: {

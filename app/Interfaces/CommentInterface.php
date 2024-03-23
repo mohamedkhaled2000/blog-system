@@ -11,7 +11,5 @@ interface CommentInterface
 
     public function create(array $data, Post $post);
 
-    public function update(array $data, Comment $comment);
-
-    public function delete(Comment $comment);
+    public function delete(array $comments);
 }

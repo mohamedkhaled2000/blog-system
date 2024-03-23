@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Inertia\Inertia;
-use Illuminate\Http\Request;
 use App\Interfaces\PostInterface;
 use App\Http\Resources\PostResource;
-use App\Http\Resources\PaginationResource;
 
 class DashboardController extends Controller
 {

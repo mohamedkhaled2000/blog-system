@@ -1,19 +1,40 @@
 <script setup>
+import { getCurrentInstance, ref, watch } from 'vue';
+import Checkbox from '../Checkbox.vue';
+import { router } from '@inertiajs/vue3';
 
-    defineProps({
-        comments: Object,
-    });
+let selectedComments = ref([]);
 
+const props = defineProps({
+    comments: Object,
+});
+
+const { emit } = getCurrentInstance();
+
+const openDialog = () => {
+    emit('openCommentDialog', selectedComments.value);
+}
 </script>
 
 <template>
-    <h4 class="mt-5">Comments {{ comments.length }}</h4>
+    <div class="flex justify-between">
+        <h4 class="mt-5">{{ $t('Comments') }} {{ comments.length }}</h4>
+        <div class="flex justify-end">
+            <button class="text-red-700" @click="openDialog" v-if="selectedComments.length > 0">
+                <i class="pi pi-trash"></i>
+            </button>
+        </div>
+    </div>
     <hr class="mt-2">
-    <div class="comments max-h-80 overflow-scroll" v-if="comments.length > 0">
+    <div class="comments max-h-80 overflow-scroll scrollbar-hide" v-if="comments.length > 0">
         <div class="comment" v-for="comment in comments" :key="comment.id">
             <div class="flex mt-3 ml-3">
+                <div class="m-3 mt-0">
+                    <Checkbox :checked="selectedComments" :value="comment.id" v-model="selectedComments"
+                        v-if="comment.is_owner" />
+                </div>
                 <Avatar :label="comment.user.name[0].toUpperCase()" shape="circle" />
-                <div class="ml-3">
+                <div class="m-3 mt-0 mb-0">
                     <div class="font-semibold">{{ comment.user.name }}</div>
                     <div class="text-xs text-gray-500">{{ comment.created_at }}</div>
                 </div>
@@ -25,6 +46,6 @@
     </div>
 
     <div v-else>
-        <div class="text-gray-500 mt-3">No comments yet</div>
+        <div class="text-gray-500 mt-3">{{ $t('No comments yet') }}</div>
     </div>
 </template>

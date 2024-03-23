@@ -21,11 +21,7 @@ class CommentRepository implements CommentInterface {
         return CommentResource::make($comment);
     }
 
-    public function update(array $data, Comment $comment) {
-        return $comment->update($data);
-    }
-
-    public function delete(Comment $comment) {
-        return $comment->delete();
+    public function delete(array $comments) {
+        return Comment::destroy($comments);
     }
 }
