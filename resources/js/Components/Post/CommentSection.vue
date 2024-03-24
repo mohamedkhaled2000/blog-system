@@ -27,22 +27,26 @@ const openDialog = () => {
     </div>
     <hr class="mt-2">
     <div class="comments max-h-80 overflow-scroll scrollbar-hide" v-if="comments.length > 0">
-        <div class="comment" v-for="comment in comments" :key="comment.id">
-            <div class="flex mt-3 ml-3">
-                <div class="m-3 mt-0">
-                    <Checkbox :checked="selectedComments" :value="comment.id" v-model="selectedComments"
-                        v-if="comment.is_owner" />
+        <Timeline :value="comments" class="w-full md:w-20rem">
+            <template #content="slotProps">
+                <div class="comment">
+                    <div class="flex mt-3 ml-3">
+                        <div class="m-3 mt-0">
+                            <Checkbox :checked="selectedComments" :value="slotProps.item.id" v-model="selectedComments"
+                                v-if="slotProps.item.is_owner" />
+                        </div>
+                        <Avatar :label="slotProps.item.user.name[0].toUpperCase()" shape="circle" />
+                        <div class="m-3 mt-0 mb-0">
+                            <div class="font-semibold">{{ slotProps.item.user.name }}</div>
+                            <div class="text-xs text-gray-500">{{ slotProps.item.created_at }}</div>
+                        </div>
+                    </div>
+                    <div class="ml-16 mt-3">
+                        <div class="text-xs text-gray-500">{{ slotProps.item.content }}</div>
+                    </div>
                 </div>
-                <Avatar :label="comment.user.name[0].toUpperCase()" shape="circle" />
-                <div class="m-3 mt-0 mb-0">
-                    <div class="font-semibold">{{ comment.user.name }}</div>
-                    <div class="text-xs text-gray-500">{{ comment.created_at }}</div>
-                </div>
-            </div>
-            <div class="ml-16 mt-3">
-                <div class="text-xs text-gray-500">{{ comment.content }}</div>
-            </div>
-        </div>
+            </template>
+        </Timeline>
     </div>
 
     <div v-else>

@@ -24,3 +24,7 @@
     scrollbar-width: none;
 }
 
+
+.p-timeline-event-opposite {
+    flex: unset !important;
+}

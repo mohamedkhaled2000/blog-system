@@ -45,8 +45,13 @@ const deletePost = (postId) => {
                     <Link :href="route('posts.create')" class="primary-button">
                         {{ $t('Create Post') }}
                     </Link>
-                    <div class="flex justify-center flex-col items-center">
-                        <PostSection v-for="post in allPosts" :key="post.id" :post="post" @deletePost="deletePost" />
+                    <div class="flex flex-col">
+                        <!-- <PostSection v-for="post in allPosts" :key="post.id" :post="post" @deletePost="deletePost" /> -->
+                        <Timeline :value="allPosts" class="mt-6 flex flex-col" style="width: 165%" >
+                            <template #content="slotProps">
+                                <PostSection :post="slotProps.item" @deletePost="deletePost" />
+                            </template>
+                        </Timeline>
                         <div ref="last"></div>
                     </div>
                 </div>
