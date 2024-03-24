@@ -97,7 +97,13 @@ const submit = () => {
                 </svg>
                 Sign up with Google
             <div>
-            </div></Link>
+            </div>
+            </Link>
+        </div>
+
+        <div class="flex justify-center items-center mt-3">
+            <span class="mr-3">{{ $t('You don\'t have an account?') }}</span>
+            <Link :href="route('register')" class="text-blue-400">Create an account</Link>
         </div>
     </GuestLayout>
 </template>

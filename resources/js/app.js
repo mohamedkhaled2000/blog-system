@@ -24,6 +24,7 @@ import 'primevue/resources/themes/aura-light-green/theme.css'
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 const i18n = createI18n({
+    legacy: false,
     locale: localStorage.getItem('locale'),
     messages: {
         en: en,

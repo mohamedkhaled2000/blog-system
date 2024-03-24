@@ -8,6 +8,8 @@ import axios from 'axios';
 import Dialog from 'primevue/dialog';
 import SplitButton from 'primevue/splitbutton';
 import { useToast } from 'primevue/usetoast';
+import { useI18n } from 'vue-i18n';
+const { t } = useI18n();
 
 const toast = useToast();
 const { emit } = getCurrentInstance();
@@ -86,14 +88,14 @@ const openCommentDialog = (selectedComments) => {
 
 const actions = [
     {
-        label: 'Update',
+        label: t('Update'),
         icon: 'pi pi-pencil text-blue-500',
         command: (ele) => {
             router.visit(route('posts.edit', props.post.id));
         }
     },
     {
-        label: 'Delete',
+        label: t('Delete'),
         icon: 'pi pi-trash text-red-500',
         command: () => {
             visible.value = true;

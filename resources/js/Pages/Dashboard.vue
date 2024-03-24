@@ -26,6 +26,7 @@ useIntersectionObserver(last, ([entry]) => {
             nextLink.value = response.data.links.next;
             allPosts.value = [...allPosts.value, ...response.data.data];
         });
+
 });
 
 const deletePost = (postId) => {

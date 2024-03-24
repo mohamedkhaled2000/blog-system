@@ -21,7 +21,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', HomeController::class)->name('home');
+Route::get('/', fn () => redirect()->route('login'))->name('home');
 
 Route::get('/dashboard', DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 

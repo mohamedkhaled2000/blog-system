@@ -66,7 +66,7 @@ const removeFile = () => {
 
                         <form @submit.prevent="submit">
                             <div class="mt-3">
-                                <InputLabel>{{ $t('Image') }}</InputLabel>
+                                <InputLabel class="m-3">{{ $t('Image') }}</InputLabel>
                                 <div class="border p-3 rounded-md">
                                     <FileUpload name="image" @select="setSelectedImage" :showCancelButton="false"
                                         :showUploadButton="false" accept="image/*" :maxFileSize="1000000" @remove="removeFile" :chooseLabel="$t('Choose')">
@@ -82,14 +82,14 @@ const removeFile = () => {
                                 <InputError class="mt-2" :message="form.errors.image" />
                             </div>
                             <div class="mt-3">
-                                <InputLabel>{{ $t('Status') }}</InputLabel>
-                                <div class="flex">
-                                    <div class="flex mr-4">
-                                        <Radiobox v-model="form.is_published" inputId="ingredient1" name="is_published" :value="true" :checked="form.is_published" />
+                                <InputLabel class="m-3">{{ $t('Status') }}</InputLabel>
+                                <div class="flex m-4">
+                                    <div class="flex m-4">
+                                        <Radiobox v-model="form.is_published" inputId="ingredient1" name="is_published" :value="true" :checked="form.is_published" class="m-1" />
                                         <InputLabel>{{ $t('Active') }}</InputLabel>
                                     </div>
-                                    <div class="flex">
-                                        <Radiobox v-model="form.is_published" inputId="ingredient1" name="is_published" :value="false" :checked="form.is_published" />
+                                    <div class="flex m-4">
+                                        <Radiobox v-model="form.is_published" inputId="ingredient1" name="is_published" :value="false" :checked="form.is_published" class="m-1" />
                                         <InputLabel>{{ $t('InActive') }}</InputLabel>
                                     </div>
                                 </div>
@@ -97,23 +97,23 @@ const removeFile = () => {
                             </div>
                             <div class="grid grid-cols-2 gap-2">
                                 <div class="mt-3">
-                                    <InputLabel>{{ $t('Title (AR)') }}</InputLabel>
+                                    <InputLabel class="m-3">{{ $t('Title (AR)') }}</InputLabel>
                                     <TextInput v-model="form.title.ar" />
                                     <InputError class="mt-2" :message="form.errors['title.ar']" />
                                 </div>
                                 <div class="mt-3">
-                                    <InputLabel>{{ $t('Title (EN)') }}</InputLabel>
+                                    <InputLabel class="m-3">{{ $t('Title (EN)') }}</InputLabel>
                                     <TextInput v-model="form.title.en" />
                                     <InputError class="mt-2" :message="form.errors['title.en']" />
                                 </div>
                             </div>
                             <div class="mt-3">
-                                <InputLabel>{{ $t('Content (AR)') }}</InputLabel>
+                                <InputLabel class="m-3">{{ $t('Content (AR)') }}</InputLabel>
                                 <Editor v-model="form.content.ar" editorStyle="height: 320px" />
                                 <InputError class="mt-2" :message="form.errors['content.ar']" />
                             </div>
                             <div class="mt-3">
-                                <InputLabel>{{ $t('Content (EN)') }}</InputLabel>
+                                <InputLabel class="m-3">{{ $t('Content (EN)') }}</InputLabel>
                                 <Editor v-model="form.content.en" editorStyle="height: 320px" />
                                 <InputError class="mt-2" :message="form.errors['content.en']" />
                             </div>
